@@ -19,7 +19,7 @@ from pathlib import Path
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from candidates import get, entities, UA  # noqa: E402
+from candidates import get, entities, sparql, UA  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE.parent
@@ -118,74 +118,134 @@ def fetch(url, path):
     raise RuntimeError(url)
 
 
-def city_of(place, ents):
-    """walk up P131 (located in) from a museum to the first place that is a city"""
-    seen = []
-    q = place
-    for _ in range(6):
-        e = ents.get(q) or entities([q], 'labels|claims')[q]
-        ents[q] = e
-        seen.append(q)
-        if q != place and {qid(c) for c in claims(e, 'P31')} & CITYISH: return q
-        up = claims(e, 'P131')
-        if not up: break
-        q = qid(up[0])
-    return None
+def chain(place, ents):
+    """a place and the places it is in (P131, located in), nearest first"""
+    out, q = [], place
+    while q and q not in out and len(out) < 8:
+        if q not in ents: ents.update(entities([q], 'labels|claims|sitelinks'))
+        out.append(q)
+        up = claims(ents[q], 'P131')
+        q = qid(up[0]) if up else None
+    return out
+
+
+def kinds(items, cls):
+    """which of these items are a kind of cls (P31/P279*)"""
+    found = set()
+    for s in range(0, len(items), 100):
+        vs = ' '.join('wd:' + i for i in items[s:s + 100])
+        found |= {b['i']['value'].rsplit('/', 1)[1] for b in sparql(f'SELECT DISTINCT ?i WHERE {{ VALUES ?i {{ {vs} }} ?i wdt:P31/wdt:P279* wd:{cls}. }}')}
+    return found
+
+
+def infobox_years(title):
+    """the years in the English Wikipedia article's infobox 'year' field (c. 1503–1519 gives 1503, 1519)"""
+    if not title: return None, None
+    r = get('https://en.wikipedia.org/w/api.php', {'action': 'query', 'titles': title, 'prop': 'revisions', 'rvprop': 'content',
+                                                   'rvslots': 'main', 'format': 'json', 'formatversion': 2, 'redirects': 1})
+    p = r['query']['pages'][0]
+    if 'revisions' not in p: return None, None
+    m = re.search(r'\|\s*year\s*=\s*(.*?)\n\s*(?:\||\}\})', p['revisions'][0]['slots']['main']['content'], re.S)
+    if not m: return None, None
+    text = re.sub(r'<ref.*?(/>|</ref>)|<!--.*?-->', '', m.group(1), flags=re.S)
+    text = re.sub(r'\{\{(?:circa|c\.|ca)\|', 'c. ', text, flags=re.I)
+    text = re.sub(r'\[\[(?:[^|\]]*\|)?([^\]]*)\]\]', r'\1', text).replace('{{', '').replace('}}', '').replace('|', ' ').strip()
+    # the first year, or the first range (1503–1506, 1610–11) when the text starts with one
+    m = re.search(r'\b(1\d{3}|[5-9]\d{2})\b(?:\s*(?:–|-|—|to)\s*(\d{2,4})\b)?', text)
+    if not m: return None, text
+    a = int(m.group(1)); b = m.group(2)
+    b = a if not b else int(str(a)[:len(str(a)) - len(b)] + b)
+    return (a, b), text
+
+
+def name_of(e):
+    """a usual English name: the English label, else the English Wikipedia title without a disambiguation"""
+    en = e.get('sitelinks', {}).get('enwiki', {}).get('title')
+    return label(e) or (re.sub(r'\s*\([^)]*\)$', '', en) if en else None)
+
+
+def pick_collection(e):
+    """the collection that holds a painting now: of its current collections (P195 without an end time), the one
+    that is also its location (P276), else the first that has coordinates, else the first"""
+    cs = [qid(c) for c in claims(e, 'P195') if 'P582' not in c.get('qualifiers', {})]
+    at = {qid(c) for c in claims(e, 'P276')}
+    for c in cs:
+        if c in at: return c
+    return cs
 
 
 def main():
     chosen = [r for r in csv.DictReader(open(HERE / 'paintings.tsv'), delimiter='\t')]
     ids = [r['qid'] for r in chosen]
     P = entities(ids)
-    # the painters, and the collections (the current one: without an end time)
     painter_of, coll_of = {}, {}
     for q in ids:
-        e = P[q]
-        cr = claims(e, 'P170')
-        if len(cr) != 1: raise SystemExit(f'{q} {label(e)}: {len(cr)} creators')
+        cr = claims(P[q], 'P170')
+        if len(cr) != 1: raise SystemExit(f'{q} {label(P[q])}: {len(cr)} creators')
         painter_of[q] = qid(cr[0])
-        cs = [c for c in claims(e, 'P195') if 'P582' not in c.get('qualifiers', {})]
-        coll_of[q] = FIXES['collection'].get(q, {}).get('qid') or (qid(cs[0]) if cs else None)
-    more = entities(sorted(set(painter_of.values()) | {c for c in coll_of.values() if c}), 'labels|claims')
-    rows, credits, notes = [], [], []
+        fix = FIXES['collection'].get(q)
+        coll_of[q] = fix['use'] if fix else pick_collection(P[q])
+    more = entities(sorted(set(painter_of.values())), 'labels|claims|sitelinks')
+    flat = {c for v in coll_of.values() for c in ([v] if isinstance(v, str) else v)}
+    more.update(entities(sorted(flat), 'labels|claims|sitelinks'))
+    for q, v in coll_of.items():
+        if isinstance(v, list):
+            if not v: raise SystemExit(f'{q} {label(P[q])}: no current collection')
+            coords = [c for c in v if claims(more[c], 'P625')]
+            coll_of[q] = (coords or v)[0]
+    # a collection may stand for a museum it is part of (the Louvre's department of paintings is the Louvre)
+    for q, c in coll_of.items():
+        if c in FIXES['museum'] and 'use' in FIXES['museum'][c]: coll_of[q] = FIXES['museum'][c]['use']
+    more.update(entities(sorted(set(coll_of.values()) - set(more)), 'labels|claims|sitelinks'))
+
+    # the city each collection is in: the nearest place it is in that is a kind of city, else of municipality
+    chains = {c: chain(c, more) for c in set(coll_of.values())}
+    every = sorted({x for ch in chains.values() for x in ch[1:]})
+    city, muni = kinds(every, 'Q515'), kinds(every, 'Q15284')
+    city_of = {c: next((x for x in ch[1:] if x in city), None) or next((x for x in ch[1:] if x in muni), None) for c, ch in chains.items()}
+
     files = {q: FIXES['image'].get(q, {}).get('file') or val(claims(P[q], 'P18')[0]) for q in ids}
     info = commons_info(sorted(set(files.values())))
-    used = set()
-    for q in ids:
+    rows, credits, years, used = [], [], [], set()
+    def one(q):
         e, pe = P[q], more[painter_of[q]]
-        title = FIXES['title'].get(q, {}).get('title')
-        if not title:
-            en = e.get('sitelinks', {}).get('enwiki', {}).get('title')
-            title = re.sub(r'\s*\([^)]*\)$', '', en) if en else label(e)
-        painter = FIXES['painter'].get(painter_of[q], {}).get('name') or label(pe)
+        title = FIXES['title'].get(q, {}).get('title') or name_of(e)
+        painter = FIXES['painter'].get(painter_of[q], {}).get('name') or name_of(pe)
         died = int(val(claims(pe, 'P570')[0])['time'][1:5])
+        # the year: Wikidata's when it is known to the year (one or a range of years); else the English Wikipedia
+        # infobox's; else Wikidata's decade or century; the middle of a range, rounded down
+        wd = [val(c) for c in claims(e, 'P571')]
+        precise = wd and all(t['precision'] >= 9 for t in wd)
         y, span = year(e)
-        if q in FIXES['year']: y, span = FIXES['year'][q]['year'], FIXES['year'][q].get('range')
+        how = 'Wikidata'
+        if q in FIXES['year']:
+            f = FIXES['year'][q]; y, span, how = f['year'], f.get('range'), f['source']
+        elif not precise:
+            ys, text = infobox_years(e.get('sitelinks', {}).get('enwiki', {}).get('title'))
+            if ys:
+                y, span, how = (ys[0] + ys[1]) // 2, (None if ys[0] == ys[1] else f'{ys[0]}–{ys[1]}'), f'English Wikipedia infobox: {text}'
+            elif y is not None:
+                how = 'Wikidata (to the decade or century)'
         if y is None: raise SystemExit(f'{q} {title}: no year')
         if died >= 1956 or y >= 1931: raise SystemExit(f'{q} {title}: painter died {died}, painted {y}: not public domain everywhere we need')
-        if span: notes.append((title, span, y))
-        mv = FIXES['movement'].get(q, {}).get('movement')
-        if not mv:
-            m = claims(e, 'P135') or claims(pe, 'P135')
-            if not m: raise SystemExit(f'{q} {title}: no movement')
-            mq = qid(m[0])
-            mv = label(more.get(mq) or entities([mq], 'labels')[mq])
-        if mv not in MOVEMENTS: raise SystemExit(f'{q} {title} ({painter}): movement {mv!r} is not in movements.json')
-        cq = coll_of[q]
-        if not cq: raise SystemExit(f'{q} {title}: no collection')
-        ce = more.get(cq) or entities([cq], 'labels|claims')[cq]
-        more[cq] = ce
-        museum = FIXES['collection'].get(q, {}).get('name') or FIXES['museum'].get(cq, {}).get('name') or label(ce)
-        loc = FIXES['museum'].get(cq, {}).get('location')
+        years.append([title, painter, '; '.join(t['time'][1:5] + '/' + str(t['precision']) for t in wd), span or '', y, how])
+        mv = (MOVEMENTS['paintings'].get(q) or MOVEMENTS['painters'].get(painter_of[q]) or [None])[0]
+        if mv not in MOVEMENTS['tree']: raise SystemExit(f'{q} {title} ({painter} {painter_of[q]}): no movement')
+        cq = coll_of[q]; ce = more[cq]
+        mfix = FIXES['museum'].get(cq, {})
+        museum = mfix.get('name') or name_of(ce)
+        loc = mfix.get('location')
         if not loc:
             co = claims(ce, 'P625')
             if not co: raise SystemExit(f'{q} {title}: {museum} ({cq}) has no coordinates')
             loc = [round(val(co[0])['latitude'], 4), round(val(co[0])['longitude'], 4)]
-        city = FIXES['museum'].get(cq, {}).get('city')
+        city = mfix.get('city')
         if not city:
-            cityq = city_of(cq, more)
+            cityq = city_of[cq]
             if not cityq: raise SystemExit(f'{q} {title}: {museum} ({cq}): no city found')
-            city = label(more[cityq])
+            city = name_of(more[cityq])
+        city = FIXES['city'].get(city, {}).get('name', city)
+        museum = re.sub(r',\s*' + re.escape(city) + '$', '', museum)
         rid = slug(title)
         if rid in used: rid = slug(f'{title} {painter.split()[-1]}')
         used.add(rid)
@@ -195,16 +255,23 @@ def main():
         (OUT / 'media').mkdir(parents=True, exist_ok=True)
         im.save(OUT / 'media' / f'{rid}.jpg', quality=82, optimize=True, progressive=True)
         rows.append({'id': rid, 'picture': f'media/{rid}.jpg', 'title': title, 'painter': painter, 'year': y,
-                     'movement': MOVEMENTS[mv], 'museum': museum, 'city': city, 'location': loc})
+                     'movement': MOVEMENTS['tree'][mv], 'museum': museum, 'city': city, 'location': loc})
         credits.append([rid, q, f, i['page'], i['licence'], i['artist'], i['credit']])
-        print(rid, '|', painter, '|', y, '|', ' › '.join(MOVEMENTS[mv]), '|', museum, '|', city, flush=True)
+        print(rid, '|', painter, '|', y, '|', ' › '.join(MOVEMENTS['tree'][mv]), '|', museum, '|', city, '|', cq, flush=True)
+    errors = []
+    for q in ids:
+        try: one(q)
+        except SystemExit as x: errors.append(str(x))
+    if errors: raise SystemExit('\n'.join(errors))
+
+
     with open(OUT / 'rows.jsonl', 'w') as fo:
         for r in rows: fo.write(json.dumps(r, ensure_ascii=False) + '\n')
     with open(HERE / 'credits.tsv', 'w', newline='') as fo:
         w = csv.writer(fo, delimiter='\t')
         w.writerow(['id', 'wikidata', 'commons file', 'commons page', 'licence', 'artist', 'credit']); w.writerows(credits)
-    with open(HERE / 'ranges.tsv', 'w', newline='') as fo:
-        w = csv.writer(fo, delimiter='\t'); w.writerow(['title', 'dated', 'year given']); w.writerows(notes)
+    with open(HERE / 'years.tsv', 'w', newline='') as fo:
+        w = csv.writer(fo, delimiter='\t'); w.writerow(['title', 'painter', 'wikidata inception (year/precision)', 'range', 'year given', 'from']); w.writerows(years)
     print(len(rows), 'rows', file=sys.stderr)
 
 

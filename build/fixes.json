@@ -1,0 +1,148 @@
+{
+ "about": "Facts given by hand, where Wikidata's own is missing or names a part of a museum. Each says where it came from.",
+ "collection": {
+  "Q1091086": {
+   "use": "Q160112",
+   "source": "Wikidata P276 (location): Museo del Prado; its P195 statements both carry end dates"
+  },
+  "Q3630745": {
+   "use": "Q42182",
+   "source": "Wikidata P276 (location): Buckingham Palace; its collection is the Royal Collection"
+  },
+  "Q1764395": {
+   "use": "Q942713",
+   "source": "Wikidata P276 (location): Scottish National Gallery"
+  },
+  "Q10301958": {
+   "use": "Q371803",
+   "source": "Wikidata P276 (location): Ipiranga Museum (Museu Paulista)"
+  }
+ },
+ "museum": {
+  "Q3044768": {
+   "use": "Q19675",
+   "source": "the Louvre's Department of Paintings is part of the Louvre (Wikidata P361)"
+  },
+  "Q653002": {
+   "use": "Q4890",
+   "source": "Wikidata P276 of the Sistine Madonna: Gemäldegalerie Alte Meister, Dresden"
+  },
+  "Q812285": {
+   "use": "Q154568",
+   "source": "Wikidata P276 of the Dürer self-portrait: Alte Pinakothek"
+  },
+  "Q942713": {
+   "city": "Edinburgh",
+   "source": "Wikidata P131: City of Edinburgh"
+  },
+  "Q377500": {
+   "city": "Brussels",
+   "source": "Wikidata P131: Brussels-Capital Region"
+  },
+  "Q1419555": {
+   "city": "Prague",
+   "source": "English Wikipedia, National Gallery Prague"
+  },
+  "Q213322": {
+   "city": "London",
+   "source": "Wikidata P131: Royal Borough of Kensington and Chelsea, Greater London"
+  },
+  "Q211962": {
+   "city": "Sergiyev Posad",
+   "source": "English Wikipedia, Trinity Lavra of St. Sergius"
+  },
+  "Q3530818": {
+   "city": "Thiruvananthapuram",
+   "source": "English Wikipedia, Kowdiar Palace"
+  },
+  "Q1662392": {
+   "city": "Istanbul",
+   "source": "Wikidata P131: Beyoğlu, Istanbul Province"
+  },
+  "Q371803": {
+   "city": "São Paulo",
+   "source": "English Wikipedia, Museu Paulista"
+  },
+  "Q1464509": {
+   "city": "Melbourne",
+   "source": "Wikidata P131: City of Melbourne"
+  },
+  "Q705557": {
+   "city": "Adelaide",
+   "source": "Wikidata P131: Adelaide"
+  },
+  "Q4796833": {
+   "city": "Perth",
+   "source": "Wikidata P131: City of Perth"
+  },
+  "Q4113546": {
+   "name": "Aivazovsky National Art Gallery",
+   "source": "English Wikipedia article title"
+  }
+ },
+ "image": {},
+ "title": {
+  "Q2344505": {
+   "title": "Madonna of the Goldfinch",
+   "source": "Wikidata English label (the English Wikipedia article is titled Madonna del Cardellino)"
+  },
+  "Q311243": {
+   "title": "Wanderer above the Sea of Fog",
+   "source": "English Wikipedia article title (the Wikidata English label had been vandalised)"
+  },
+  "Q2395218": {
+   "title": "Woman with a Parasol",
+   "source": "English Wikipedia article title, without its subtitle 'Madame Monet and Her Son'"
+  },
+  "Q1170315": {
+   "title": "Black Square",
+   "source": "Wikidata English label without the year"
+  },
+  "Q4089077": {
+   "title": "Bogatyrs",
+   "source": "the title the English Wikipedia article on Viktor Vasnetsov uses ('his most famous painting, the Bogatyrs')"
+  }
+ },
+ "painter": {
+  "Q610971": {
+   "name": "José María Velasco",
+   "source": "English Wikipedia: 'generally known as José María Velasco'"
+  },
+  "Q213163": {
+   "name": "Élisabeth Vigée Le Brun",
+   "source": "English Wikipedia article title"
+  }
+ },
+ "year": {
+  "Q31892412": {
+   "year": 1703,
+   "range": "1701–1705",
+   "source": "English Wikipedia, Irises screen: 'probably made circa 1701–1705'"
+  },
+  "Q107045370": {
+   "year": 1474,
+   "range": "1470–1479",
+   "source": "English Wikipedia, Autumn and Winter Landscapes infobox: 1470s"
+  },
+  "Q321303": {
+   "year": 1500,
+   "range": "1490–1510",
+   "source": "English Wikipedia, The Garden of Earthly Delights: 'painted between 1490 and 1510'"
+  },
+  "Q4089077": {
+   "year": 1889,
+   "range": "1881–1898",
+   "source": "Russian Wikipedia, Богатыри (картина Васнецова), infobox: 1881—1898"
+  },
+  "Q11531476": {
+   "year": 1595,
+   "source": "English Wikipedia, Shōrin-zu byōbu: 'made in the late 16th century, in the Momoyama period, around 1595'"
+  }
+ },
+ "city": {
+  "City of Westminster": {
+   "name": "London",
+   "source": "a borough of London (Wikidata P131)"
+  }
+ }
+}
