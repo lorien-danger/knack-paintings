@@ -1,0 +1,497 @@
+{
+ "about": "The movement column. Each painter is given one movement (the leaf), taken from their Wikidata item's 'movement' (P135) or, where Wikidata has none, from their English Wikipedia article (the source is given below). A painting is given its own only where the painter changed style (its Wikidata P135). The levels above each movement (a part of the world, then a family of movements or a country) are this dataset's own grouping.",
+ "painters": {
+  "Q838": [
+   "Icon painting",
+   "en.wikipedia Andrei Rublev: 'medieval Russian painters of Orthodox Christian icons'"
+  ],
+  "Q5669": [
+   "Early Renaissance",
+   "Wikidata P135"
+  ],
+  "Q762": [
+   "High Renaissance",
+   "Wikidata P135"
+  ],
+  "Q5597": [
+   "High Renaissance",
+   "Wikidata P135"
+  ],
+  "Q5592": [
+   "High Renaissance",
+   "Wikidata P135"
+  ],
+  "Q47551": [
+   "Venetian school",
+   "Wikidata P135"
+  ],
+  "Q102272": [
+   "Early Netherlandish",
+   "Wikidata P135 (Early Netherlandish painting)"
+  ],
+  "Q130531": [
+   "Early Netherlandish",
+   "Wikidata P135 (Early Netherlandish painting)"
+  ],
+  "Q43270": [
+   "Northern Renaissance",
+   "Wikidata P135"
+  ],
+  "Q5580": [
+   "Northern Renaissance",
+   "Wikidata P135 (German Renaissance)"
+  ],
+  "Q48319": [
+   "Northern Renaissance",
+   "Wikidata P135"
+  ],
+  "Q301": [
+   "Mannerism",
+   "Wikidata P135"
+  ],
+  "Q42207": [
+   "Italian Baroque",
+   "Wikidata P135 (Baroque)"
+  ],
+  "Q212657": [
+   "Italian Baroque",
+   "Wikidata P135 (Caravaggisti)"
+  ],
+  "Q5598": [
+   "Dutch Golden Age",
+   "Wikidata P135 (Dutch Golden Age painting)"
+  ],
+  "Q41264": [
+   "Dutch Golden Age",
+   "Wikidata P135 (Dutch Golden Age painting)"
+  ],
+  "Q167654": [
+   "Dutch Golden Age",
+   "Wikidata P135 (Dutch Golden Age painting)"
+  ],
+  "Q5599": [
+   "Flemish Baroque",
+   "Wikidata P135 (Flemish Baroque painting)"
+  ],
+  "Q297": [
+   "Spanish Baroque",
+   "Wikidata P135 (Baroque); Portrait of Innocent X: Spanish Baroque painting"
+  ],
+  "Q213163": [
+   "Rococo",
+   "Wikidata P135"
+  ],
+  "Q83155": [
+   "Neoclassicism",
+   "Wikidata P135"
+  ],
+  "Q5432": [
+   "Romanticism",
+   "Wikidata P135"
+  ],
+  "Q33477": [
+   "Romanticism",
+   "Wikidata P135"
+  ],
+  "Q104884": [
+   "Romanticism",
+   "Wikidata P135 (German Romanticism)"
+  ],
+  "Q159758": [
+   "Romanticism",
+   "Wikidata P135"
+  ],
+  "Q159297": [
+   "Romanticism",
+   "Wikidata P135"
+  ],
+  "Q122382": [
+   "Romanticism",
+   "Wikidata P135"
+  ],
+  "Q181568": [
+   "Romanticism",
+   "Wikidata P135"
+  ],
+  "Q172911": [
+   "Realism",
+   "Wikidata P135"
+  ],
+  "Q551652": [
+   "Realism",
+   "en.wikipedia Mihály Munkácsy infobox: movement Realism"
+  ],
+  "Q189117": [
+   "History painting",
+   "en.wikipedia Jan Matejko infobox: movement History painting"
+  ],
+  "Q40599": [
+   "Realism",
+   "Wikidata P135 of his paintings here (French Realism); A Bar at the Folies-Bergère: Impressionism"
+  ],
+  "Q296": [
+   "Impressionism",
+   "Wikidata P135"
+  ],
+  "Q39931": [
+   "Impressionism",
+   "Wikidata P135"
+  ],
+  "Q46373": [
+   "Impressionism",
+   "Wikidata P135"
+  ],
+  "Q105320": [
+   "Impressionism",
+   "Wikidata P135"
+  ],
+  "Q173223": [
+   "Impressionism",
+   "Wikidata P135"
+  ],
+  "Q155626": [
+   "Impressionism",
+   "Wikidata P135; Madame X: academic art"
+  ],
+  "Q5582": [
+   "Post-Impressionism",
+   "Wikidata P135"
+  ],
+  "Q35548": [
+   "Post-Impressionism",
+   "Wikidata P135"
+  ],
+  "Q82445": [
+   "Post-Impressionism",
+   "Wikidata P135"
+  ],
+  "Q37693": [
+   "Post-Impressionism",
+   "Wikidata P135"
+  ],
+  "Q34013": [
+   "Neo-Impressionism",
+   "Wikidata P135"
+  ],
+  "Q156386": [
+   "Naïve art",
+   "Wikidata P135"
+  ],
+  "Q204138": [
+   "Symbolism",
+   "Wikidata P135"
+  ],
+  "Q170068": [
+   "Symbolism",
+   "Wikidata P135"
+  ],
+  "Q34661": [
+   "Art Nouveau",
+   "Wikidata P135"
+  ],
+  "Q41406": [
+   "Expressionism",
+   "Wikidata P135"
+  ],
+  "Q44032": [
+   "Expressionism",
+   "Wikidata P135"
+  ],
+  "Q61064": [
+   "Abstract art",
+   "Wikidata P135 of Composition VII (abstract art)"
+  ],
+  "Q130777": [
+   "Suprematism",
+   "Wikidata P135"
+  ],
+  "Q151803": [
+   "De Stijl",
+   "Wikidata P135"
+  ],
+  "Q344838": [
+   "Realism (United States)",
+   "Wikidata P135"
+  ],
+  "Q203643": [
+   "Tonalism",
+   "Wikidata P135 of his paintings here (Tonalism)"
+  ],
+  "Q217434": [
+   "Regionalism",
+   "Wikidata P135"
+  ],
+  "Q610971": [
+   "Academic art (Latin America)",
+   "en.wikipedia José María Velasco: studied landscape at the Academy of San Carlos"
+  ],
+  "Q540219": [
+   "Academic art (Latin America)",
+   "Wikidata P135 of Independence or Death (Brazilian academic art); en.wikipedia: 'one of the most important academic painters in Brazil'"
+  ],
+  "Q1291901": [
+   "Heidelberg School",
+   "Wikidata P135"
+  ],
+  "Q709280": [
+   "Heidelberg School",
+   "Wikidata P135"
+  ],
+  "Q965809": [
+   "Heidelberg School",
+   "Wikidata P135"
+  ],
+  "Q1190012": [
+   "Orientalism",
+   "en.wikipedia Osman Hamdi Bey: trained under the French Orientalists Gérôme and Boulanger, painted Orientalist motifs"
+  ],
+  "Q333453": [
+   "Academic art (India)",
+   "en.wikipedia Raja Ravi Varma: 'the fusion of European academic art with a purely Indian sensibility'"
+  ],
+  "Q691796": [
+   "Bengal School",
+   "en.wikipedia Abanindranath Tagore infobox: movement Bengal school of art"
+  ],
+  "Q1278559": [
+   "Northern Song landscape",
+   "Wikidata P135 (Northern Landscape style)"
+  ],
+  "Q536645": [
+   "Northern Song landscape",
+   "en.wikipedia Guo Xi infobox: movement Northern Song"
+  ],
+  "Q48514": [
+   "Ink painting",
+   "en.wikipedia Sesshū Tōyō: 'a great master of Japanese ink painting'"
+  ],
+  "Q719668": [
+   "Hasegawa school",
+   "Wikidata P135"
+  ],
+  "Q952938": [
+   "Rimpa school",
+   "Wikidata P135"
+  ],
+  "Q489785": [
+   "True-view painting",
+   "en.wikipedia Jeong Seon infobox: movement true-view painting"
+  ]
+ },
+ "paintings": {
+  "Q1245354": [
+   "Impressionism",
+   "Wikidata P135"
+  ],
+  "Q2664039": [
+   "Academic art",
+   "Wikidata P135"
+  ],
+  "Q1240092": [
+   "Spanish Baroque",
+   "Wikidata P135 (Spanish Baroque painting)"
+  ]
+ },
+ "tree": {
+  "Icon painting": [
+   "Europe",
+   "Middle Ages",
+   "Icon painting"
+  ],
+  "Early Renaissance": [
+   "Europe",
+   "Renaissance",
+   "Early Renaissance"
+  ],
+  "High Renaissance": [
+   "Europe",
+   "Renaissance",
+   "High Renaissance"
+  ],
+  "Venetian school": [
+   "Europe",
+   "Renaissance",
+   "Venetian school"
+  ],
+  "Early Netherlandish": [
+   "Europe",
+   "Renaissance",
+   "Early Netherlandish"
+  ],
+  "Northern Renaissance": [
+   "Europe",
+   "Renaissance",
+   "Northern Renaissance"
+  ],
+  "Mannerism": [
+   "Europe",
+   "Renaissance",
+   "Mannerism"
+  ],
+  "Italian Baroque": [
+   "Europe",
+   "Baroque",
+   "Italian Baroque"
+  ],
+  "Dutch Golden Age": [
+   "Europe",
+   "Baroque",
+   "Dutch Golden Age"
+  ],
+  "Flemish Baroque": [
+   "Europe",
+   "Baroque",
+   "Flemish Baroque"
+  ],
+  "Spanish Baroque": [
+   "Europe",
+   "Baroque",
+   "Spanish Baroque"
+  ],
+  "Rococo": [
+   "Europe",
+   "Rococo to Romanticism",
+   "Rococo"
+  ],
+  "Neoclassicism": [
+   "Europe",
+   "Rococo to Romanticism",
+   "Neoclassicism"
+  ],
+  "Romanticism": [
+   "Europe",
+   "Rococo to Romanticism",
+   "Romanticism"
+  ],
+  "Realism": [
+   "Europe",
+   "Realism and academic art",
+   "Realism"
+  ],
+  "History painting": [
+   "Europe",
+   "Realism and academic art",
+   "History painting"
+  ],
+  "Academic art": [
+   "Europe",
+   "Realism and academic art",
+   "Academic art"
+  ],
+  "Impressionism": [
+   "Europe",
+   "Impressionism and after",
+   "Impressionism"
+  ],
+  "Neo-Impressionism": [
+   "Europe",
+   "Impressionism and after",
+   "Neo-Impressionism"
+  ],
+  "Post-Impressionism": [
+   "Europe",
+   "Impressionism and after",
+   "Post-Impressionism"
+  ],
+  "Naïve art": [
+   "Europe",
+   "Impressionism and after",
+   "Naïve art"
+  ],
+  "Symbolism": [
+   "Europe",
+   "Symbolism and Art Nouveau",
+   "Symbolism"
+  ],
+  "Art Nouveau": [
+   "Europe",
+   "Symbolism and Art Nouveau",
+   "Art Nouveau"
+  ],
+  "Expressionism": [
+   "Europe",
+   "Modernism",
+   "Expressionism"
+  ],
+  "Abstract art": [
+   "Europe",
+   "Modernism",
+   "Abstract art"
+  ],
+  "Suprematism": [
+   "Europe",
+   "Modernism",
+   "Suprematism"
+  ],
+  "De Stijl": [
+   "Europe",
+   "Modernism",
+   "De Stijl"
+  ],
+  "Tonalism": [
+   "Americas",
+   "United States",
+   "Tonalism"
+  ],
+  "Regionalism": [
+   "Americas",
+   "United States",
+   "Regionalism"
+  ],
+  "Realism (United States)": [
+   "Americas",
+   "United States",
+   "Realism"
+  ],
+  "Academic art (Latin America)": [
+   "Americas",
+   "Latin America",
+   "Academic art"
+  ],
+  "Heidelberg School": [
+   "Oceania",
+   "Australia",
+   "Heidelberg School"
+  ],
+  "Orientalism": [
+   "Middle East",
+   "Ottoman Empire",
+   "Orientalism"
+  ],
+  "Academic art (India)": [
+   "South Asia",
+   "India",
+   "Academic art"
+  ],
+  "Bengal School": [
+   "South Asia",
+   "India",
+   "Bengal School"
+  ],
+  "Northern Song landscape": [
+   "East Asia",
+   "China",
+   "Northern Song landscape"
+  ],
+  "Ink painting": [
+   "East Asia",
+   "Japan",
+   "Ink painting"
+  ],
+  "Hasegawa school": [
+   "East Asia",
+   "Japan",
+   "Hasegawa school"
+  ],
+  "Rimpa school": [
+   "East Asia",
+   "Japan",
+   "Rimpa school"
+  ],
+  "True-view painting": [
+   "East Asia",
+   "Korea",
+   "True-view painting"
+  ]
+ }
+}
