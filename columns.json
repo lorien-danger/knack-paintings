@@ -69,6 +69,13 @@
    "file": "look.npy",
    "of": "picture",
    "model": "facebook/dinov2-base"
+  },
+  {
+   "name": "painter sound",
+   "type": "embedding",
+   "file": "painter-sound.npy",
+   "of": "painter",
+   "model": "bookbot/onnx-byt5-small-wikipron-eng-latn-au-broad"
   }
  ]
 }
