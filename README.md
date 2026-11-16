@@ -9,7 +9,7 @@ globe. Two embeddings are included: how each picture looks and how the painter's
 Most painters have two to four paintings here, so "who painted this?" has something to learn from. Five have one:
 Andrei Rublev, Fan Kuan, Guo Xi, Hasegawa Tōhaku and Grant Wood.
 
-Suggested practice: *Who painted it?* (picture, painter), *What is it called?* (picture, title) and *When and
+Suggested practice: *Who painted it?* (picture, painter), *Name the painting* (picture, title) and *When and
 where?* (picture, year, where it hangs).
 
 ## Columns
