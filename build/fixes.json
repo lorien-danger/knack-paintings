@@ -75,9 +75,13 @@
    "city": "Perth",
    "source": "Wikidata P131: City of Perth"
   },
-  "Q4113546": {
+  "Q4314838": {
    "name": "Aivazovsky National Art Gallery",
    "source": "English Wikipedia article title"
+  },
+  "Q1132918": {
+   "name": "Nasjonalmuseet",
+   "source": "its own (Norwegian) name, Wikidata's Norwegian label; the English one, 'National Museum of Art, Architecture and Design', is too long for a button"
   }
  },
  "image": {
@@ -110,6 +114,38 @@
   "Q4089077": {
    "title": "Bogatyrs",
    "source": "the title the English Wikipedia article on Viktor Vasnetsov uses ('his most famous painting, the Bogatyrs')"
+  },
+  "Q890678": {
+   "title": "Where Do We Come From?",
+   "source": "shortened here to fit a button; the full title is in Wikidata"
+  },
+  "Q4195595": {
+   "title": "Ivan the Terrible and His Son Ivan",
+   "source": "English Wikipedia article title"
+  },
+  "Q1044742": {
+   "title": "A Sunday on La Grande Jatte",
+   "source": "the Art Institute of Chicago's title, 'A Sunday on La Grande Jatte — 1884'"
+  },
+  "Q2339059": {
+   "title": "Rain, Steam and Speed",
+   "source": "shortened here to fit a button; the full title is in Wikidata (without 'The Great Western Railway')"
+  },
+  "Q6609114": {
+   "title": "Astronomer Copernicus",
+   "source": "shortened here to fit a button; the full title is in Wikidata (without 'or Conversations with God')"
+  },
+  "Q646337": {
+   "title": "The Falling Rocket",
+   "source": "shortened here to fit a button; the full title is in Wikidata (its subtitle; the full title is 'Nocturne in Black and Gold – The Falling Rocket')"
+  },
+  "Q1982719": {
+   "title": "Brig Mercury Attacked by Two Turkish Ships",
+   "source": "Wikidata English label without the quotation marks"
+  },
+  "Q579455": {
+   "title": "White on White",
+   "source": "shortened here to fit a button; the full title is in Wikidata (without 'Suprematist Composition:')"
   }
  },
  "painter": {
@@ -146,6 +182,11 @@
   "Q11531476": {
    "year": 1595,
    "source": "English Wikipedia, Shōrin-zu byōbu: 'made in the late 16th century, in the Momoyama period, around 1595'"
+  },
+  "Q570188": {
+   "year": 1419,
+   "range": "1411–1427",
+   "source": "English Wikipedia, Trinity (Andrei Rublev) infobox: '1411 or 1425–27'; the middle of the whole span"
   }
  },
  "city": {

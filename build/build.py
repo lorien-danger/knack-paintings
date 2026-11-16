@@ -266,6 +266,9 @@ def main():
     if errors: raise SystemExit('\n'.join(errors))
 
 
+    keep = {r['picture'].split('/', 1)[1] for r in rows}
+    for old in (OUT / 'media').iterdir():
+        if old.name not in keep: old.unlink()
     with open(OUT / 'rows.jsonl', 'w') as fo:
         for r in rows: fo.write(json.dumps(r, ensure_ascii=False) + '\n')
     with open(HERE / 'credits.tsv', 'w', newline='') as fo:
