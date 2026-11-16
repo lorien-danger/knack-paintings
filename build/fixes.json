@@ -80,7 +80,16 @@
    "source": "English Wikipedia article title"
   }
  },
- "image": {},
+ "image": {
+  "Q2470123": {
+   "file": "Judith Beheading Holofernes-Caravaggio (c.1598-9).jpg",
+   "source": "a public-domain copy (Wikidata's P18 photo is CC BY-SA 4.0)"
+  },
+  "Q1245354": {
+   "file": "Edouard Manet, A Bar at the Folies-Bergère.jpg",
+   "source": "a public-domain copy (Wikidata's P18 photo is CC BY 2.0, taken at an exhibition)"
+  }
+ },
  "title": {
   "Q2344505": {
    "title": "Madonna of the Goldfinch",

@@ -1,0 +1,74 @@
+{
+ "name": "Paintings",
+ "item": "painting",
+ "items": "paintings",
+ "title": "title",
+ "practices": [
+  {
+   "name": "Who painted it?",
+   "columns": [
+    "picture",
+    "painter"
+   ]
+  },
+  {
+   "name": "What is it called?",
+   "columns": [
+    "picture",
+    "title"
+   ]
+  },
+  {
+   "name": "When and where?",
+   "columns": [
+    "picture",
+    "year",
+    "museum"
+   ]
+  }
+ ],
+ "columns": [
+  {
+   "name": "picture",
+   "type": "plain",
+   "media": "image"
+  },
+  {
+   "name": "title",
+   "type": "plain"
+  },
+  {
+   "name": "painter",
+   "type": "plain"
+  },
+  {
+   "name": "year",
+   "type": "number"
+  },
+  {
+   "name": "movement",
+   "type": "tree"
+  },
+  {
+   "name": "museum",
+   "type": "plain",
+   "label": "Where it hangs"
+  },
+  {
+   "name": "city",
+   "type": "plain"
+  },
+  {
+   "name": "location",
+   "type": "sphere",
+   "label": "Where in the world"
+  },
+  {
+   "name": "look",
+   "type": "embedding",
+   "file": "look.npy",
+   "of": "picture",
+   "model": "facebook/dinov2-base"
+  }
+ ]
+}

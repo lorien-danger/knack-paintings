@@ -100,7 +100,7 @@ def commons_info(files):
         norm = {n['to']: n['from'] for n in r['query'].get('normalized', [])}
         for p in r['query']['pages']:
             ii = p['imageinfo'][0]; m = ii.get('extmetadata', {})
-            g = lambda k: re.sub(r'<[^>]+>', '', m.get(k, {}).get('value', '')).strip()
+            g = lambda k: re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', m.get(k, {}).get('value', ''))).strip()
             out[norm.get(p['title'], p['title'])[5:]] = {'thumb': ii['thumburl'], 'page': ii['descriptionurl'], 'width': ii['width'], 'height': ii['height'],
                                                      'licence': g('LicenseShortName'), 'artist': g('Artist'), 'credit': g('Credit')}
     return out
@@ -250,6 +250,7 @@ def main():
         if rid in used: rid = slug(f'{title} {painter.split()[-1]}')
         used.add(rid)
         f = files[q]; i = info[f]
+        if i['licence'] not in ('Public domain', 'CC0'): raise SystemExit(f'{q} {title}: {f} is {i["licence"]}: choose a public-domain copy in fixes.json')
         im = Image.open(io.BytesIO(fetch(i['thumb'], CACHE / 'img' / f'{q}.jpg'))).convert('RGB')
         im.thumbnail((SIZE, SIZE), Image.LANCZOS)
         (OUT / 'media').mkdir(parents=True, exist_ok=True)
