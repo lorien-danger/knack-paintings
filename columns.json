@@ -32,7 +32,12 @@
    "name": "picture",
    "type": "plain",
    "media": "image",
-   "fit": "contain"
+   "fit": "contain",
+   "near": {
+    "file": "look.npy",
+    "by": "look",
+    "model": "facebook/dinov2-base"
+   }
   },
   {
    "name": "title",
@@ -40,7 +45,12 @@
   },
   {
    "name": "painter",
-   "type": "plain"
+   "type": "plain",
+   "near": {
+    "file": "painter-sound.npy",
+    "by": "sound",
+    "model": "bookbot/onnx-byt5-small-wikipron-eng-latn-au-broad"
+   }
   },
   {
    "name": "year",
@@ -64,20 +74,6 @@
    "name": "location",
    "type": "sphere",
    "label": "Where in the world"
-  },
-  {
-   "name": "look",
-   "type": "embedding",
-   "file": "look.npy",
-   "of": "picture",
-   "model": "facebook/dinov2-base"
-  },
-  {
-   "name": "painter sound",
-   "type": "embedding",
-   "file": "painter-sound.npy",
-   "of": "painter",
-   "model": "bookbot/onnx-byt5-small-wikipron-eng-latn-au-broad"
   }
  ]
 }

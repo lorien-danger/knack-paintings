@@ -49,7 +49,14 @@ if __name__ == '__main__':
     full = run([root / r[OF] for r in rows])
     np.save(HERE / 'look-full.npy', full.astype(np.float32))
     np.save(root / FILE, reduce(full))
-    col = {'name': COLUMN, 'type': 'embedding', 'file': FILE, 'of': OF, 'model': MODEL}
-    meta['columns'] = [col if c['name'] == COLUMN else c for c in meta['columns']] if any(c['name'] == COLUMN for c in meta['columns']) else meta['columns'] + [col]
+    # what makes two of the column's values alike is written on the column itself ("near"), never as a column of
+    # its own
+    by = COLUMN[len(OF) + 1:] if COLUMN.startswith(OF + ' ') else COLUMN
+    near = {'file': FILE, 'by': by, 'model': MODEL}
+    meta['columns'] = [c for c in meta['columns'] if c['name'] != COLUMN]
+    for c in meta['columns']:
+        if c['name'] == OF:
+            others = [x for x in ([c['near']] if isinstance(c.get('near'), dict) else c.get('near', [])) if x.get('file') != FILE]
+            c['near'] = [*others, near] if others else near
     with open(root / 'columns.json', 'w') as f: f.write(json.dumps(meta, indent=1, ensure_ascii=False) + '\n')
     print(COLUMN, full.shape, '->', FILE, flush=True)
